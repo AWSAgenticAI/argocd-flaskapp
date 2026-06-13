@@ -1,27 +1,38 @@
-from flask import Flask , jsonify
-from datetime import datetime
+from flask import Flask, jsonify
 import socket
+from datetime import datetime
+import os
+import sys
 
 app = Flask(__name__)
 
-
 @app.route("/myflaskapp/v1/details")
-#def hello_world():
-#    return "<h1>Hello, World!</h1>"
 def hello_details():
     return jsonify({
         "message": "Hello, World!",
         "hostname": socket.gethostname(),
-        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        })
-
-
+        "ip_address": socket.gethostbyname(socket.gethostname()),
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "environment": {
+            "os": os.name,
+            "platform": sys.platform,
+            "python_version": sys.version
+        },
+        "app_status": "active"
+    })
 
 @app.route("/myflaskapp/v1/health")
 def health_check():
-    return jsonify({"status": "up"}), 200
-
+    # Basic self-check metrics
+    health_status = {
+        "status": "healthy",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "checks": {
+            "database_connected": True,  # Mock check
+            "disk_space": "OK"            # Mock check
+        }
+    }
+    return jsonify(health_status), 200
 
 if __name__ == "__main__":
-    #app.run() 
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=5000)
