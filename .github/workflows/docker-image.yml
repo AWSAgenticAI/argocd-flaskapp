@@ -2,27 +2,47 @@ on:
   push:
     branches: [ "main" ]
 
+# Grant permission to the pipeline to write back to your Git repository
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: [self-hosted]
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
+    
+    - name: Build and Import Docker image
       run: |
-       ls
-       # create docker image of python app
-       sudo docker build -t flaskapp .
-       sudo docker images
-       # save image in k3s controller to access argocd deployment
-       sudo docker save flaskapp:latest | sudo k3s ctr images import -
+       # Tag and import the image with the unique GitHub commit SHA
+       sudo docker build -t flaskapp:${{ github.sha }} .
+       sudo docker save flaskapp:${{ github.sha }} | sudo k3s ctr images import -
 
   deploy:
-    # This enforces that job1 (build) must complete successfully first
     needs: build
     runs-on: [self-hosted]
     steps:
     - uses: actions/checkout@v4
-    - name: Deploy Kubernetes Manifest
+      with:
+        # Fetch full history so we can push back safely
+        fetch-depth: 0 
+    
+    - name: Update Deployment Image Tag in Git
+      env:
+        # Pass the built-in token to the step environment
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        # Apply the deployment file to your cluster
-        sudo kubectl apply -f argocd-flaskapp.yaml
+        # Change the image tag inside your deployment sub-directory
+        sed -i 's|image: flaskapp:.*|image: flaskapp:${{ github.sha }}|g' app-deployment/flaskapp.yaml
+        
+        # Configure local git user profile
+        git config --global user.name  "github-action[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Commit the file change
+        git add app-deployment/flaskapp.yaml
+        git commit -m "chore: update flaskapp image tag to ${{ github.sha }} [skip ci]"
+        
+        # Authenticate origin with the token and push safely
+        git remote set-url origin https://x-token-auth:${GITHUB_TOKEN}@://github.com{{ github.repository }}.git
+        git push origin main
