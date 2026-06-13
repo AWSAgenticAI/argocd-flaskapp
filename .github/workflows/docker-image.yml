@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: [self-hosted, backstage-runner]
+    runs-on: [self-hosted, backstage-runner, linux, x64]
 
     steps:
     - uses: actions/checkout@v4
