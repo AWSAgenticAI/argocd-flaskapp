@@ -11,5 +11,7 @@ jobs:
     - name: Build the Docker image
       run: |
        ls
-       pwd
+       # create docker image of python app
+       docker build -t python-app1 .
+       docker images
        
