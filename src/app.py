@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/myflaskapp/v1/details")
 def hello_details():
     return jsonify({
-        "message": "Hello, World!",
+        "message": "Hello, World! latest 1.0",
         "hostname": socket.gethostname(),
         "ip_address": socket.gethostbyname(socket.gethostname()),
         "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -25,7 +25,7 @@ def hello_details():
 def health_check():
     # Basic self-check metrics
     health_status = {
-        "status": "healthy",
+        "status": "healthy 1.0 ",
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "checks": {
             "database_connected": True,  # Mock check
