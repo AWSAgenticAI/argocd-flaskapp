@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     # Target your specific runner directly and fix the lowercase tags
-    runs-on: [self-hosted, backstage-runner, linux, x64]
+    runs-on: [self-hosted]
 
     steps:
     - uses: actions/checkout@v4
