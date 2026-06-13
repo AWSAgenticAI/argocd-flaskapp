@@ -12,6 +12,6 @@ jobs:
       run: |
        ls
        # create docker image of python app
-       docker build -t python-app1 .
-       docker images
+       sudo docker build -t python-app1 .
+       sudo docker images
        
