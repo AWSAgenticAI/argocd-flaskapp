@@ -11,7 +11,7 @@ jobs:
       run: |
        ls
        # create docker image of python app
-       sudo docker build -t python-app1 .
+       sudo docker build -t flaskapp .
        sudo docker images
        # save image in k3s controller to access argocd deployment
        sudo docker save flaskapp:latest | sudo k3s ctr images import -
