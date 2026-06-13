@@ -14,7 +14,7 @@ jobs:
        sudo docker build -t python-app1 .
        sudo docker images
        # save image in k3s controller to access argocd deployment
-       docker save flaskapp:latest | sudo k3s ctr images import -
+       sudo docker save flaskapp:latest | sudo k3s ctr images import -
 
   deploy:
     # This enforces that job1 (build) must complete successfully first
