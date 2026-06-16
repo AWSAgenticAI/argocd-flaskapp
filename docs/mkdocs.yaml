@@ -1,0 +1,15 @@
+site_name: 'Backstage'
+site_description: 'Main documentation for Flask Python App'
+repo_url: https://github.com/AWSAgenticAI/argocd-flaskap
+edit_uri: edit/main/docs
+
+plugins:
+  - techdocs-core
+  - redirects:
+      redirect_maps:
+        'index.md': 'overview/what-is-backstage.md'
+
+# For sidebar navigation on https://backstage.io/, see `microsite/sidebars.js`
+nav:
+  - Overview:
+      - What is Backstage?: 'docs/index.md'
