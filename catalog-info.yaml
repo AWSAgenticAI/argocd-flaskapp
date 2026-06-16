@@ -6,6 +6,7 @@ metadata:
   annotations:
     github.com/project-slug: AWSAgenticAI/argocd-flaskapp
     backstage.io/source-location: url:https://github.com
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   owner: indar1009
