@@ -7,5 +7,5 @@ metadata:
     github.com/project-slug: AWSAgenticAI/argocd-flaskapp
 spec:
   type: service
-  owner: guest
+  owner: indar1009
   lifecycle: experimental
