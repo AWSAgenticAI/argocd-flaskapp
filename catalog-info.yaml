@@ -5,7 +5,6 @@ metadata:
   description: "flask python application"
   annotations:
     github.com/project-slug: AWSAgenticAI/argocd-flaskapp
-    backstage.io/source-location: url:https://github.com/AWSAgenticAI/argocd-flaskapp
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
