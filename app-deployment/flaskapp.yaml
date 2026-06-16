@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flaskapp
-        image: flaskapp:8e2d98db067499999bf7e4fcd56500cbc690d05f
+        image: flaskapp:32c11136f7b74a85e27b0829a207d137b66e8e97
         imagePullPolicy: IfNotPresent # Tells k3s to use the locally imported image if available
         ports:
         - containerPort: 5000
