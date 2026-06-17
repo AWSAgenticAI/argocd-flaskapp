@@ -5,5 +5,7 @@ myflaskapp/v1/details
 myflaskapp/v1/health
 
 You can access application using below url :--
-http://100.54.145.95/myflaskapp/v1/details
-http://100.54.145.95/myflaskapp/v1/health
+
+http://100.27.189.56/myflaskapp/v1/details
+
+http://100.27.189.56/myflaskapp/v1/health
