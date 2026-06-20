@@ -5,7 +5,7 @@ metadata:
   labels:
     app: flaskapp
 spec:
-  replicas: 1 # Runs two copies of your app for high availability
+  replicas: 0 # Runs two copies of your app for high availability
   selector:
     matchLabels:
       app: flaskapp
